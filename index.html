@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Iaia Carmiña en Rappi</title>
+</head>
+<body>
+  <p>Abriendo Rappi...</p>
+  <script>
+    const appScheme = "rappi://stores/361108";
+    const webFallback = "https://www.rappi.com.co/restaurantes/delivery/361108-iaia-carmina";
+
+    // Intenta abrir la app
+    window.location.href = appScheme;
+
+    // Si después de 2s no se abrió, redirige al navegador
+    setTimeout(() => {
+      window.location.href = webFallback;
+    }, 2000);
+  </script>
+</body>
+</html>
