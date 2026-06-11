@@ -8,63 +8,50 @@
     body { 
       font-family: Arial, sans-serif; 
       text-align: center; 
-      padding: 40px 20px; 
+      padding: 50px 20px; 
       background-color: #f9f9f9;
     }
     h2 { color: #333; }
-    p { color: #666; margin-bottom: 30px; }
+    p { color: #666; margin-bottom: 30px; font-size: 16px; }
     .btn { 
       display: inline-block; 
-      padding: 15px 30px; 
+      padding: 18px 35px; 
       background-color: #FF441F;
       color: white; 
       text-decoration: none; 
       border-radius: 50px; 
       font-weight: bold; 
-      font-size: 18px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-size: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
-  <h2>Redirigiendo a Iaia Carmiña...</h2>
-  <p>Si la aplicación de Rappi no se abre automáticamente, toca el botón:</p>
+  <h2>Menú de Iaia Carmiña</h2>
+  <p>Toca el botón abajo para ir directamente a nuestra tienda en la app de Rappi.</p>
   
-  <a href="#" class="btn" id="manualBtn">Abrir en la App de Rappi</a>
+  <a href="#" class="btn" id="manualBtn">Abrir App de Rappi</a>
 
   <script>
-    // Variables de tu tienda
     const storeId = "361108";
     const webUrl = "https://www.rappi.com.co/restaurantes/delivery/361108-iaia-carmina";
     
-    // Enlaces nativos para cada sistema
     const iosScheme = "rappi://stores/" + storeId;
     const androidIntent = "intent://stores/" + storeId + "#Intent;scheme=rappi;package=com.grability.rappi;S.browser_fallback_url=" + encodeURIComponent(webUrl) + ";end";
     
-    // Detección del sistema operativo
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const isAndroid = /android/i.test(userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
     const btn = document.getElementById('manualBtn');
 
+    // Solo preparamos el botón, CERO redirecciones automáticas
     if (isAndroid) {
-        // ESTRATEGIA ANDROID: Usa el Intent agresivo que salta bloqueos
         btn.href = androidIntent;
-        window.location.replace(androidIntent);
     } else if (isIOS) {
-        // ESTRATEGIA IOS: Intenta abrir el esquema nativo de Apple
         btn.href = iosScheme;
-        window.location.replace(iosScheme);
-        
-        // Safari a veces ignora la orden automática. Si en 2.5s no ha salido de Safari, lo mandamos a la web.
-        setTimeout(() => {
-            window.location.replace(webUrl);
-        }, 2500);
     } else {
-        // ESTRATEGIA ESCRITORIO: Lo manda directo a la versión web de escritorio
         btn.href = webUrl;
-        window.location.replace(webUrl);
     }
   </script>
 </body>
